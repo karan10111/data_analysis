@@ -1,0 +1,12 @@
+select
+    data.accountid as accointid,
+    data.lastmodified as eventtime,
+    data.networktype as networktype,
+    parent.data.visit.location.latitude as latitude,
+    parent.data.visit.location.longitude as longitude
+from bigfoot_journaldart_fkint_cp_ca_common_connectinfo_2_0
+where
+    data.accountid is not null and
+    parent.data.visit.location.latitude is not null and
+    parent.data.visit.location.longitude is not null and
+    day > 20160101;
