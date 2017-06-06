@@ -38,7 +38,7 @@ object Bangalore {
 
  def raw_data_frame(sqlContext: HiveContext) : DataFrame = {
     sqlContext.sql("ADD JAR /usr/share/athena-jars/json-serde-1.3-SNAPSHOT-jar-with-dependencies.jar")
-    val raw = sqlContext.sql("select data.accountid as accountid, data.lastmodified as eventtime, data.networktype as networktype, data.networkidentifier as networkidentifier, parent.data.visit.location.latitude as latitude, parent.data.visit.location.longitude as longitude from bigfoot_journal.dart_fkint_cp_ca_common_connectinfo_2_0 where data.accountid is not null and parent.data.visit.location.latitude is not null and parent.data.visit.location.longitude is not null and day > 20160101 ")
+    val raw = sqlContext.sql("select data.accountid as accountid, data.lastmodified as eventtime, data.networktype as networktype, data.networkidentifier as networkidentifier, parent.data.visit.location.latitude as latitude, parent.data.visit.location.longitude as longitude from bigfoot_journal.dart_fkint_cp_ca_common_connectioninfo_2 where data.accountid is not null and parent.data.visit.location.latitude is not null and parent.data.visit.location.longitude is not null and day > 20160101 ")
     raw.write.format("json").save("/tmp/raw_with_ssid")
     return raw
  }
